@@ -4,6 +4,7 @@
   import { currentColor } from "../stores/palette";
   import { currentPen, pens } from "../pens";
     import { currentTool } from "../tools";
+    import { currentTextInput } from "../text";
 
   let stage: Stage;
   let layer: Layer;
@@ -63,8 +64,24 @@
     layer.node.add(currentLine);
   }
 
+  function continueDrawing() {
+    if (!isPainting) return;
+
+    const pos = stage.node.getPointerPosition()
+    if (!pos) return;
+
+    if (!currentLine) return;
+    currentLine.points([...currentLine.points(), pos.x, pos.y])
+    layer.node.add(currentLine);
+  }
+
+  function finishDrawing() {
+    isPainting = false;
+    if (!currentLine) return;
+  }
+
   function startRectangle() {
-    isShaping = false;
+    isShaping = true;
 
     let pos = stage.node.getPointerPosition();
     if (!pos) return;
@@ -95,6 +112,22 @@
     isShaping = false;
   }
 
+  function putText() {
+    let pos = stage.node.getPointerPosition();
+    if (!pos) return;
+
+    const simpleText = new Konva.Text({
+      x: pos.x,
+      y: pos.y,
+      text: $currentTextInput,
+      fontSize: 30,
+      fontFamily: 'Calibri',
+      fill: $currentColor
+    });
+
+    layer.node.add(simpleText)
+  }
+
   function onMouseDown(e: KonvaMouseEvent) {
     if ($currentTool == "Pen") {
       startDrawing();
@@ -104,13 +137,11 @@
       fillCanvas();
     } else if ($currentTool == "Rectangle") {
       startRectangle();
+    } else if ($currentTool == "Text") {
+      putText();
     }
   }
 
-  function finishDrawing() {
-    isPainting = false;
-    if (!currentLine) return;
-  }
 
   function onMouseUp(e: KonvaMouseEvent) {
     if ($currentTool == "Pen" || $currentTool == "Eraser") finishDrawing();
@@ -118,17 +149,7 @@
     
   }
 
-  function continueDrawing() {
-    if (!isPainting) return;
 
-    const pos = stage.node.getPointerPosition()
-    if (!pos) return;
-
-    if (!currentLine) return;
-    currentLine.points([...currentLine.points(), pos.x, pos.y])
-    layer.node.add(currentLine);
-  }
-  
   function onMouseMove(e: KonvaMouseEvent) {
     if ($currentTool == "Pen" || $currentTool == "Eraser") continueDrawing();
     if ($currentTool == "Rectangle") continueRectangle();
