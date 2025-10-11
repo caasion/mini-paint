@@ -3,39 +3,51 @@
   import {Stage, Layer, Rect, Line, type KonvaMouseEvent} from 'svelte-konva';
 
   let stage: Stage;
+  let layer: Layer;
 
   let isPainting = $state(false);
-  let currentLine: Konva.Line = $state(null);
+  let currentLine: Konva.Line | null = $state(null);
   let brushColor = "#000000"
   let brushSize = 6;
 
-  function paint(e: KonvaMouseEvent) {
+  function onMouseDown(e: KonvaMouseEvent) {
     isPainting = true;
 
-    console.log("painting")
-
     let pos = stage.node.getPointerPosition();
+    if (!pos) return;
 
-    console.log(pos)
-
-    if (pos) {
-      currentLine = new Konva.Line({
+    currentLine = new Konva.Line({
       points: [pos.x, pos.y],
       stroke: brushColor,
       strokeWidth: brushSize,
       lineCap: 'round',
       lineJoin: 'round',
       listening: false,
-      // tension: 0.4, // optional smoothing
     })
-    }
+  }
 
+  function onMouseUp(e: KonvaMouseEvent) {
+    isPainting = false;
+    if (!currentLine) return;
     
   }
+  
+
+  function onMouseMove(e: KonvaMouseEvent) {
+    if(!isPainting) return;
+
+    const pos = stage.node.getPointerPosition()
+    if (!pos) return;
+
+    if (!currentLine) return;
+    currentLine.points([...currentLine.points(), pos.x, pos.y])
+    layer.node.add(currentLine);
+  }
+    
 </script>
 
-<Stage width={1000} height={1000} bind:this={stage} onmousedown={(e) => paint(e)}>
-  <Layer>
-    <Rect x={100} y={100} width={400} height={200} fill="blue" />
+<Stage width={1000} height={1000} bind:this={stage} onmousedown={(e) => onMouseDown(e)} onmouseup={(e) => onMouseUp(e)} onmousemove={(e) => onMouseMove(e)}>
+  <Layer bind:this={layer}>
+    <Rect x={0} y={0} width={1000} height={1000} fill="white" />
   </Layer>
 </Stage>
