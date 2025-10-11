@@ -53,14 +53,12 @@ const eraserConfig: PenConfig = {
     }
 }
 
-
-
 export const pens: Record<string, PenConfig> = {
     'brush': brushConfig,
+    'pencil': pencilConfig,
     'eraser': eraserConfig,
-    'pencil': pencilConfig
 }
 
-export type Pen = 'brush' | 'pencil' | 'eraser';
+export type Pen = 'brush' | 'pencil';
 
-export const penList = ['brush', 'pencil', 'eraser']
+export const penList = ['brush', 'pencil']

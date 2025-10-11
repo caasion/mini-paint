@@ -10,6 +10,7 @@
   let background: Rect;
 
   let isPainting = $state(false);
+  let isShaping = $state(false);
   let currentLine: Konva.Line | null = $state(null);
   let brushSize = 6;
 
@@ -32,25 +33,46 @@
   function startDrawing() {
     isPainting = true;
 
-      let pos = stage.node.getPointerPosition();
-      if (!pos) return;
+    let pos = stage.node.getPointerPosition();
+    if (!pos) return;
 
-      console.log(pens[$currentPen])
+    currentLine = new Konva.Line({
+      points: [pos.x, pos.y, pos.x, pos.y],
+      stroke: $currentColor,
+      ...pens[$currentPen].line
+    })
 
-      currentLine = new Konva.Line({
-        points: [pos.x, pos.y, pos.x, pos.y],
-        stroke: $currentColor,
-        ...pens[$currentPen].line
-      })
+    layer.node.add(currentLine);
+  }
 
-      layer.node.add(currentLine);
+  function startErasing() {
+    isPainting = true;
+
+    let pos = stage.node.getPointerPosition();
+    if (!pos) return;
+
+    console.log("Erasing")
+
+    currentLine = new Konva.Line({
+      points: [pos.x, pos.y, pos.x, pos.y],
+      stroke: $currentColor,
+      ...pens['eraser'].line
+    })
+
+    layer.node.add(currentLine);
+  }
+
   }
 
   function onMouseDown(e: KonvaMouseEvent) {
     if ($currentTool == "Pen") {
-      startDrawing()
+      startDrawing();
+    } else if ($currentTool == "Eraser") {
+      startErasing();
     } else if ($currentTool == "Bucket") {
-      fillCanvas()
+      fillCanvas();
+    } else if ($currentTool == "Rectangle") {
+      startRectangle();
     }
   }
 
@@ -60,12 +82,13 @@
   }
 
   function onMouseUp(e: KonvaMouseEvent) {
-    if ($currentTool == "Pen") finishDrawing();
+    if ($currentTool == "Pen" || $currentTool == "Eraser") finishDrawing();
+    else if ($currentTool == "Rectangle") finishRectangle();
     
   }
 
   function continueDrawing() {
-    if(!isPainting) return;
+    if (!isPainting) return;
 
     const pos = stage.node.getPointerPosition()
     if (!pos) return;
@@ -76,7 +99,8 @@
   }
   
   function onMouseMove(e: KonvaMouseEvent) {
-    if ($currentTool == "Pen") continueDrawing();
+    if ($currentTool == "Pen" || $currentTool == "Eraser") continueDrawing();
+    if ($currentTool == "Rectangle") continueRectangle();
   }
     
 </script>
@@ -85,7 +109,11 @@
 </div>
 
 <Stage width={1000} height={1000} bind:this={stage} onmousedown={(e) => onMouseDown(e)} onmouseup={(e) => onMouseUp(e)} onmousemove={(e) => onMouseMove(e)}>
-  <Layer bind:this={layer}>
+  
+  <Layer >
     <Rect bind:this={background} x={0} y={0} width={1000} height={1000} fill="white" />
+  </Layer>
+  <Layer bind:this={layer}>
+
   </Layer>
 </Stage>
