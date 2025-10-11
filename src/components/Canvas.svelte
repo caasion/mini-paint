@@ -26,7 +26,7 @@
   });
 
   $effect(() => {
-    layerStore.set(stage.node);
+    layerStore.set(layer.node);
   })
 
   function setBackground() {
