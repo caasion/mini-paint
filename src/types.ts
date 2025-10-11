@@ -1,5 +1,7 @@
 export type Tool = "Brush" | "Pen" | "Bucket" | "Eraser";
 
+export const tools: Tool[] = ["Brush", "Pen", "Bucket", "Eraser"];
+
 // Create my own interface for pen configs
 export type PenConfig = {
   id: string;

@@ -1,13 +1,14 @@
 <script>
     import { currentTool, setCurrentTool } from "../stores/palette";
+    import { tools } from "../types";
 </script>
 
 <div style="display: flex">
-    <div onclick={() => setCurrentTool("Brush")}>
-        Brush!!!!
-    </div>
-    <div onclick={() => setCurrentTool("Bucket")}>
-        Bucket!!!!
-    </div>
+    {#each tools as tool, id}
+        <button onclick={() => setCurrentTool(tool)}>
+            <p>{tool} !!!!!</p>
+            
+        </button>
+    {/each}
 </div>
 
