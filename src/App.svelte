@@ -10,11 +10,5 @@
 </script>
 
 <main>
-  <ToolSelector />
-  <PenSelector />
-  <Palette />
-  {#if $currentTool == "Text"}
-    <TextTool />
-  {/if}
   <Canvas />
 </main>
