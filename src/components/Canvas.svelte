@@ -5,10 +5,15 @@
 
   let stage: Stage;
   let layer: Layer;
+  let background: Rect;
 
   let isPainting = $state(false);
   let currentLine: Konva.Line | null = $state(null);
   let brushSize = 6;
+
+  function setBackground() {
+    background.node.fill("#aaaaaa")
+  }
 
   function onMouseDown(e: KonvaMouseEvent) {
     isPainting = true;
@@ -44,9 +49,12 @@
   }
     
 </script>
+<div onclick={() => setBackground()}>
+  CHANGE BACKGROUND WOWOWOWO!
+</div>
 
 <Stage width={1000} height={1000} bind:this={stage} onmousedown={(e) => onMouseDown(e)} onmouseup={(e) => onMouseUp(e)} onmousemove={(e) => onMouseMove(e)}>
   <Layer bind:this={layer}>
-    <Rect x={0} y={0} width={1000} height={1000} fill="white" />
+    <Rect bind:this={background} x={0} y={0} width={1000} height={1000} fill="white" />
   </Layer>
 </Stage>
