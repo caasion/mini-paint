@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "canvas": "^3.2.0",
-    "konva": "^10.0.2"
+    "konva": "^10.0.2",
+    "svelte-konva": "^1.0.0"
   }
 }
