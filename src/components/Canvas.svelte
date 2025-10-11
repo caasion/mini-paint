@@ -5,6 +5,8 @@
   import { currentPen, pens } from "../pens";
   import { currentTool } from "../tools";
   import { currentTextInput } from "../text";
+  import { downloadStagePNG } from "../download";
+  import paintbrush from '../cursors/paintbrush_32.png'
 
   let stage: Stage;
   let layer: Layer;
@@ -179,14 +181,30 @@
     if ($currentTool == "Rectangle") continueRectangle();
     if ($currentTool == "Text Draw") continueTextDrawing();
   }
-    
+
+  function clearLayer(layer: Konva.Layer) {
+    layer.destroyChildren();
+    layer.draw();
+  }
 </script>
+
 <div onclick={() => setBackground()}>
   CHANGE BACKGROUND WOWOWOWO!
 </div>
 
-
-<Stage width={1000} height={1000} bind:this={stage} onmousedown={(e) => onMouseDown(e)} onmouseup={(e) => onMouseUp(e)} onmousemove={(e) => onMouseMove(e)}>
+<button onclick={() => downloadStagePNG(stage.node, "download.png")}>
+    Save!!!!
+</button>
+<button onclick={() => clearLayer(layer.node)}>
+  Clear!!!
+</button>
+<div class="pen" style={`cursors: url(${paintbrush}), pointer !important;`}>
+  <Stage 
+  width={1000} height={1000} 
+  bind:this={stage} 
+  onmousedown={(e) => onMouseDown(e)} onmouseup={(e) => onMouseUp(e)} onmousemove={(e) => onMouseMove(e)}
+  
+>
   
   <Layer >
     <Rect bind:this={background} x={0} y={0} width={1000} height={1000} fill="white" />
@@ -195,3 +213,15 @@
 
   </Layer>
 </Stage>
+</div>
+
+
+<style>
+  .pen {
+    cursor: url('/src/cursors/paintbrush_32.png'), pointer !important;
+  }
+
+  .eraser {
+
+  }
+</style>
