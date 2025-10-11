@@ -1,6 +1,6 @@
 import type { PenConfig } from "./types";
 
-export const brushConfig: PenConfig = {
+const brushConfig: PenConfig = {
     id: 'brush',
     label: 'Brush',
     line: {
@@ -10,7 +10,7 @@ export const brushConfig: PenConfig = {
     }
 }
 
-export const eraserConfig: PenConfig = {
+const eraserConfig: PenConfig = {
     id: 'eraser',
     label: 'Eraser',
     line: {
@@ -19,7 +19,7 @@ export const eraserConfig: PenConfig = {
     }
 }
 
-export const pencilConfig: PenConfig = {
+const pencilConfig: PenConfig = {
     id: 'pencil',
     label: 'Pencil',
     line: {
@@ -27,4 +27,10 @@ export const pencilConfig: PenConfig = {
         lineCap: 'butt',
         lineJoin: 'round',
     }
+}
+
+export const pens: Record<string, PenConfig> = {
+    'brush': brushConfig,
+    'eraser': eraserConfig,
+    'pencil': pencilConfig
 }
