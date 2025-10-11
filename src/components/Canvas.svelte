@@ -34,13 +34,15 @@
       if (!pos) return;
 
       currentLine = new Konva.Line({
-        points: [pos.x, pos.y],
+        points: [pos.x, pos.y, pos.x, pos.y],
         stroke: $currentColor,
         strokeWidth: brushSize,
         lineCap: 'round',
         lineJoin: 'round',
         listening: false,
       })
+
+      layer.node.add(currentLine);
   }
 
   function onMouseDown(e: KonvaMouseEvent) {
