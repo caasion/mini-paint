@@ -7,7 +7,8 @@
   import { currentTextInput } from "../text";
   import { downloadStagePNG } from "../download";
   import paintbrush from '../cursors/paintbrush_32.png'
-    import { stageStore } from "../canvasStore";
+    import { layerStore, stageStore } from "../canvasStore";
+    import { clearLayer } from "../clear";
 
   let stage: Stage;
   let layer: Layer;
@@ -19,6 +20,14 @@
   let currentLine: Konva.Line | null = $state(null);
   let currentRectangle: Konva.Rect | null = $state(null);
   let brushSize = 6;
+
+  $effect(() => {
+    stageStore.set(stage.node);
+  });
+
+  $effect(() => {
+    layerStore.set(stage.node);
+  })
 
   function setBackground() {
     background.node.fill("#aaaaaa")
@@ -183,28 +192,46 @@
     if ($currentTool == "Text Draw") continueTextDrawing();
   }
 
-  function clearLayer(layer: Konva.Layer) {
-    layer.destroyChildren();
-    layer.draw();
-  }
+  
 </script>
 
 <div onclick={() => setBackground()}>
   CHANGE BACKGROUND WOWOWOWO!
 </div>
 
-<button onclick={() => downloadStagePNG(stage.node, "download.png")}>
-    Save!!!!
-</button>
-<button onclick={() => clearLayer(layer.node)}>
-  Clear!!!
-</button>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+
+<h1 style="text-align:center; margin:16px 0 8px; line-height:1; font-family: 'Indie Flower', cursive;">
+  Mini Paint
+</h1>
+<hr style="margin:6px 0">
+<h3 style="display:inline-block; margin-right:30px; font-family: 'Indie Flower', cursive;">
+    <button>
+        File
+    </button>
+</h3>
+<h3 
+    style="display:inline-block; margin-right:30px; font-family: 'Indie Flower', cursive;"
+    
+>
+    <button onclick={() => downloadStagePNG(stage.node, "download.png")}>
+        Save
+    </button>
+</h3>
+<h3 style="display:inline-block; margin-right:30px; font-family: 'Indie Flower', cursive;">
+    <button>View</button>
+</h3>
+<h3 style="display:inline-block; font-family: 'Indie Flower', cursive;">
+    <button onclick={() => clearLayer(layer.node)}>Clear</button>
+</h3>
+
 <div class="pen" style={$currentTool == "Pen" ? `cursors: url(${paintbrush}), pointer !important;` : ""}>
   <Stage 
   width={1000} height={1000} 
   bind:this={stage} 
   onmousedown={(e) => onMouseDown(e)} onmouseup={(e) => onMouseUp(e)} onmousemove={(e) => onMouseMove(e)}
-  on:mount{() => stageStore.set(stage)}
   
 >
   
