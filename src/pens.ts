@@ -1,4 +1,28 @@
-import type { PenConfig } from "./types";
+import { writable } from "svelte/store";
+
+/* Types */
+export type PenConfig = {
+  id: string;
+  label: string;
+  // Konva.Line config
+  line: {
+    strokeWidth: number;
+    opacity?: number;
+    lineCap?: 'round' | 'butt' | 'square';
+    lineJoin?: 'round' | 'miter' | 'bevel';
+    tension?: number;
+    dash?: number[];
+    globalCompositeOperation?: GlobalCompositeOperation;
+  }
+}
+
+/* Stores */
+export const currentPen = writable("Pen");
+
+export function setCurrentPen(pen: string) {
+    currentPen.set(pen);
+    console.log("Selected pen:", pen)
+}
 
 const brushConfig: PenConfig = {
     id: 'brush',
@@ -7,15 +31,6 @@ const brushConfig: PenConfig = {
         strokeWidth: 5,
         lineCap: 'round',
         lineJoin: 'round',
-    }
-}
-
-const eraserConfig: PenConfig = {
-    id: 'eraser',
-    label: 'Eraser',
-    line: {
-        strokeWidth: 5,
-        globalCompositeOperation: 'destination-out'
     }
 }
 
@@ -29,8 +44,23 @@ const pencilConfig: PenConfig = {
     }
 }
 
+const eraserConfig: PenConfig = {
+    id: 'eraser',
+    label: 'Eraser',
+    line: {
+        strokeWidth: 5,
+        globalCompositeOperation: 'destination-out'
+    }
+}
+
+
+
 export const pens: Record<string, PenConfig> = {
     'brush': brushConfig,
     'eraser': eraserConfig,
     'pencil': pencilConfig
 }
+
+export type Pen = 'brush' | 'pencil' | 'eraser';
+
+export const penList = ['brush', 'pencil', 'eraser']

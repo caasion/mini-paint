@@ -1,7 +1,8 @@
 <script lang="ts">
   import Canvas from './components/Canvas.svelte'
-    import Palette from './components/Palette.svelte';
-    import ToolSelector from './components/ToolSelector.svelte';
+  import Palette from './components/Palette.svelte';
+  import PenSelector from './components/PenSelector.svelte';
+  import ToolSelector from './components/ToolSelector.svelte';
 </script>
 
 <main>
@@ -9,6 +10,7 @@
 
   <div class="card">
     <ToolSelector />
+    <PenSelector />
     <Palette />
     <Canvas />
   </div>

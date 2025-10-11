@@ -1,7 +1,9 @@
 <script lang="ts">
   import Konva from "konva";
   import {Stage, Layer, Rect, Line, type KonvaMouseEvent} from 'svelte-konva';
-  import { currentColor, currentTool } from "../stores/palette";
+  import { currentColor } from "../stores/palette";
+  import { currentPen, pens } from "../pens";
+    import { currentTool } from "../tools";
 
   let stage: Stage;
   let layer: Layer;
@@ -33,24 +35,21 @@
       let pos = stage.node.getPointerPosition();
       if (!pos) return;
 
+      console.log(pens[$currentPen])
+
       currentLine = new Konva.Line({
         points: [pos.x, pos.y, pos.x, pos.y],
         stroke: $currentColor,
-        strokeWidth: brushSize,
-        lineCap: 'round',
-        lineJoin: 'round',
-        listening: false,
+        ...pens[$currentPen].line
       })
 
       layer.node.add(currentLine);
   }
 
   function onMouseDown(e: KonvaMouseEvent) {
-    console.log($currentTool);
-    if ($currentTool == "Brush") {
+    if ($currentTool == "Pen") {
       startDrawing()
     } else if ($currentTool == "Bucket") {
-      console.log("bucket tool used")
       fillCanvas()
     }
   }
@@ -61,7 +60,7 @@
   }
 
   function onMouseUp(e: KonvaMouseEvent) {
-    if ($currentTool == "Brush") finishDrawing();
+    if ($currentTool == "Pen") finishDrawing();
     
   }
 
@@ -77,7 +76,7 @@
   }
   
   function onMouseMove(e: KonvaMouseEvent) {
-    if ($currentTool == "Brush") continueDrawing();
+    if ($currentTool == "Pen") continueDrawing();
   }
     
 </script>

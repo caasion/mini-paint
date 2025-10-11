@@ -1,10 +1,9 @@
 <script>
-    import { currentTool, setCurrentTool } from "../stores/palette";
-    import { tools } from "../types";
+    import { setCurrentTool, toolList } from "../tools";
 </script>
 
 <div style="display: flex">
-    {#each tools as tool, id}
+    {#each toolList as tool, id}
         <button onclick={() => setCurrentTool(tool)}>
             <p>{tool} !!!!!</p>
             
