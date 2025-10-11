@@ -12,6 +12,7 @@
   let isPainting = $state(false);
   let isShaping = $state(false);
   let currentLine: Konva.Line | null = $state(null);
+  let currentRectangle: Konva.Rect | null = $state(null);
   let brushSize = 6;
 
   function setBackground() {
@@ -62,6 +63,36 @@
     layer.node.add(currentLine);
   }
 
+  function startRectangle() {
+    isShaping = false;
+
+    let pos = stage.node.getPointerPosition();
+    if (!pos) return;
+
+    currentRectangle = new Konva.Rect({
+      x: pos.x,
+      y: pos.y,
+      stroke: 'black',
+      strokeWidth: 4,
+      width: 0,
+      height: 0,
+    })
+  }
+
+  function continueRectangle() {
+    if (!isShaping) return;
+
+    const pos = stage.node.getPointerPosition()
+    if (!pos) return;
+
+    if (!currentRectangle) return;
+    currentRectangle.width(pos.x - currentRectangle.x())
+    currentRectangle.height(pos.y - currentRectangle.y())
+    layer.node.add(currentRectangle);
+  }
+
+  function finishRectangle() {
+    isShaping = false;
   }
 
   function onMouseDown(e: KonvaMouseEvent) {
