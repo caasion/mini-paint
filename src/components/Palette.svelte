@@ -1,5 +1,5 @@
 <script>
-    import { currentColor, setCurrentColor } from "../stores/palette";
+    import { currentColor, setCurrentColor } from "../palette";
 </script>
 
 <div style="display: flex">

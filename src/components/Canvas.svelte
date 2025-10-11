@@ -1,12 +1,13 @@
 <script lang="ts">
   import Konva from "konva";
   import {Stage, Layer, Rect, Line, type KonvaMouseEvent} from 'svelte-konva';
-  import { currentColor } from "../stores/palette";
+  import { currentColor } from "../palette";
   import { currentPen, pens } from "../pens";
   import { currentTool } from "../tools";
   import { currentTextInput } from "../text";
   import { downloadStagePNG } from "../download";
   import paintbrush from '../cursors/paintbrush_32.png'
+    import { stageStore } from "../canvasStore";
 
   let stage: Stage;
   let layer: Layer;
@@ -198,11 +199,12 @@
 <button onclick={() => clearLayer(layer.node)}>
   Clear!!!
 </button>
-<div class="pen" style={`cursors: url(${paintbrush}), pointer !important;`}>
+<div class="pen" style={$currentTool == "Pen" ? `cursors: url(${paintbrush}), pointer !important;` : ""}>
   <Stage 
   width={1000} height={1000} 
   bind:this={stage} 
   onmousedown={(e) => onMouseDown(e)} onmouseup={(e) => onMouseUp(e)} onmousemove={(e) => onMouseMove(e)}
+  on:mount{() => stageStore.set(stage)}
   
 >
   
