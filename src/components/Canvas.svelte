@@ -1,13 +1,13 @@
 <script lang="ts">
   import Konva from "konva";
   import {Stage, Layer, Rect, Line, type KonvaMouseEvent} from 'svelte-konva';
+  import { currentColor } from "../stores/palette";
 
   let stage: Stage;
   let layer: Layer;
 
   let isPainting = $state(false);
   let currentLine: Konva.Line | null = $state(null);
-  let brushColor = "#000000"
   let brushSize = 6;
 
   function onMouseDown(e: KonvaMouseEvent) {
@@ -18,7 +18,7 @@
 
     currentLine = new Konva.Line({
       points: [pos.x, pos.y],
-      stroke: brushColor,
+      stroke: $currentColor,
       strokeWidth: brushSize,
       lineCap: 'round',
       lineJoin: 'round',
@@ -32,7 +32,6 @@
     
   }
   
-
   function onMouseMove(e: KonvaMouseEvent) {
     if(!isPainting) return;
 
