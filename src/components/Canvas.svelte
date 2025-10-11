@@ -3,8 +3,8 @@
   import {Stage, Layer, Rect, Line, type KonvaMouseEvent} from 'svelte-konva';
   import { currentColor } from "../stores/palette";
   import { currentPen, pens } from "../pens";
-    import { currentTool } from "../tools";
-    import { currentTextInput } from "../text";
+  import { currentTool } from "../tools";
+  import { currentTextInput } from "../text";
 
   let stage: Stage;
   let layer: Layer;
@@ -12,6 +12,7 @@
 
   let isPainting = $state(false);
   let isShaping = $state(false);
+  let isTextDrawing = $state(false);
   let currentLine: Konva.Line | null = $state(null);
   let currentRectangle: Konva.Rect | null = $state(null);
   let brushSize = 6;
@@ -112,20 +113,42 @@
     isShaping = false;
   }
 
-  function putText() {
+  function putText(text: string) {
     let pos = stage.node.getPointerPosition();
     if (!pos) return;
 
     const simpleText = new Konva.Text({
       x: pos.x,
       y: pos.y,
-      text: $currentTextInput,
+      text: text,
       fontSize: 30,
       fontFamily: 'Calibri',
       fill: $currentColor
     });
 
     layer.node.add(simpleText)
+  }
+
+  function startTextDrawing() {
+    isTextDrawing = true;
+
+    let pos = stage.node.getPointerPosition();
+    if (!pos) return;
+
+    putText("💩")
+  }
+
+  function continueTextDrawing() {
+    if (!isTextDrawing) return;
+
+    const pos = stage.node.getPointerPosition()
+    if (!pos) return;
+
+    putText("💩")
+  }
+
+  function finishTextDrawing() {
+    isTextDrawing = false;
   }
 
   function onMouseDown(e: KonvaMouseEvent) {
@@ -138,27 +161,30 @@
     } else if ($currentTool == "Rectangle") {
       startRectangle();
     } else if ($currentTool == "Text") {
-      putText();
+      putText($currentTextInput);
+    } else if ($currentTool == "Text Draw") {
+      startTextDrawing();
     }
   }
-
 
   function onMouseUp(e: KonvaMouseEvent) {
     if ($currentTool == "Pen" || $currentTool == "Eraser") finishDrawing();
     else if ($currentTool == "Rectangle") finishRectangle();
+    else if ($currentTool == "Text Draw") finishTextDrawing();
     
   }
-
 
   function onMouseMove(e: KonvaMouseEvent) {
     if ($currentTool == "Pen" || $currentTool == "Eraser") continueDrawing();
     if ($currentTool == "Rectangle") continueRectangle();
+    if ($currentTool == "Text Draw") continueTextDrawing();
   }
     
 </script>
 <div onclick={() => setBackground()}>
   CHANGE BACKGROUND WOWOWOWO!
 </div>
+
 
 <Stage width={1000} height={1000} bind:this={stage} onmousedown={(e) => onMouseDown(e)} onmouseup={(e) => onMouseUp(e)} onmousemove={(e) => onMouseMove(e)}>
   
