@@ -1,12 +1,14 @@
 <script lang="ts">
   import Canvas from './components/Canvas.svelte'
     import Palette from './components/Palette.svelte';
+    import ToolSelector from './components/ToolSelector.svelte';
 </script>
 
 <main>
   <h1>Mini Painter</h1>
 
   <div class="card">
+    <ToolSelector />
     <Palette />
     <Canvas />
   </div>
