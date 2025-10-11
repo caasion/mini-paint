@@ -17,7 +17,7 @@ export type PenConfig = {
 }
 
 /* Stores */
-export const currentPen = writable("Pen");
+export const currentPen = writable("brush");
 
 export function setCurrentPen(pen: string) {
     currentPen.set(pen);
