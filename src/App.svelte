@@ -9,9 +9,24 @@
     import Header from './components/Header.svelte';
 </script>
 
-<main>
+<header class="header">
+  <Header />
+</header>
+
+<aside class="sidebar">
+<ToolSelector />
   {#if $currentTool == "Text"}
     <TextTool />
   {/if}
+  <Palette />
+</aside>
+
+<main class="main">
   <Canvas />
 </main>
+
+<style>
+    body {
+        font-family: 'Indie Flower', cursive;
+    }
+</style>

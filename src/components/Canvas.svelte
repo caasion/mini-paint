@@ -7,8 +7,8 @@
   import { currentTextInput } from "../text";
   import { downloadStagePNG } from "../download";
   import paintbrush from '../cursors/paintbrush_32.png'
-    import { layerStore, stageStore } from "../canvasStore";
-    import { clearLayer } from "../clear";
+  import { layerStore, stageStore } from "../canvasStore";
+  import { clearLayer } from "../clear";
 
   let stage: Stage;
   let layer: Layer;

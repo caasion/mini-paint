@@ -1,12 +1,10 @@
-<script>
+<script lang="ts">
     import { penList, setCurrentPen } from "../pens";
 </script>
 
 <div style="display: flex">
         <button onclick={() => setCurrentPen("brush")}>
-        <svg fill="#ffffff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 width="32px" height="32px" viewBox="0 0 347.523 347.523"
-	 xml:space="preserve">
+        <svg fill="#ffffff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px" height="32px" viewBox="0 0 347.523 347.523" xml:space="preserve">
             <g>
                 <g>
                     <path d="M108.674,196.125c-2.857-0.402-5.777-0.592-8.746-0.534c-14.267,0.278-36.342,6.092-60.493,32.207

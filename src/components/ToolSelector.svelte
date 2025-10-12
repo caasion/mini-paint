@@ -3,7 +3,7 @@
     import { setCurrentTool, toolList } from "../tools";
 </script>
 
-<div style="display: flex; width: 200px; height: 100px; border: 2px solid black; display: flex; justify-content: center; align-items: top;">
+<div>
     <button onclick={() => {
         setCurrentTool("Pen")
         setCurrentPen("pencil")
@@ -45,3 +45,7 @@
     </button>
     
 </div>
+
+<style>
+
+</style>
