@@ -6,7 +6,6 @@
   import { currentTool, setCurrentTool } from "../tools";
   import { currentTextInput } from "../text";
   import { downloadStagePNG } from "../download";
-  import paintbrush from '../cursors/paintbrush_32.png'
   import { layerStore, stageStore } from "../canvasStore";
   import { clearLayer } from "../clear";
 
@@ -195,7 +194,7 @@
   
 </script>
 
-<div class="pen" style={$currentTool == "Pen" ? `cursors: url(${paintbrush}), pointer !important;` : ""}>
+<div class="pen">
   <Stage 
   width={1000} height={1000} 
   bind:this={stage} 
@@ -214,7 +213,7 @@
 
 <style>
   .pen {
-    cursor: url('/src/cursors/paintbrush_32.png'), pointer !important;
+    cursor: url('/src/icons/paintbrush_32.png'), pointer !important;
   }
 
   .eraser {

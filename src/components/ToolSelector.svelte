@@ -3,12 +3,12 @@
     import { setCurrentTool, toolList } from "../tools";
 </script>
 
-<div>
+<div class="tool-container">
     <button onclick={() => {
         setCurrentTool("Pen")
         setCurrentPen("pencil")
     }}>
-        <img src="Pencil.png" alt="Pencil" style="width:45px; height:40px; position: relative; ">
+        <img src="/src/icons/pencil.svg" alt="Pencil" style="width:45px; height:40px; position: relative; ">
     </button>
     
     
@@ -16,36 +16,43 @@
         setCurrentTool("Pen")
         setCurrentPen("brush")
     }}>
-        <img src="Paint.png" alt="Paint" style="width:40px; height:40px; position: relative; ">
+        <img src="/src/icons/brush.svg" alt="Brush" class="icon">
     </button>
 
     <button onclick={() => {
         setCurrentTool("Eraser")
     }}>
-        <img src="Eraser.png" alt="Eraser" style="width:40px; height:40px; position: relative; ">
+        <img src="/src/icons/eraser.svg" alt="Eraser" class="icon">
     </button>
 
     
     <button onclick={() => {
         setCurrentTool("Bucket")
     }}>
-        <img src="Bucket.png" alt="Bucket" style="width:40px; height:40px; position: relative; ">
+        <img src="/src/icons/bucket.svg" alt="Bucket" class="icon">
     </button>
 
     <button onclick={() => {
         setCurrentTool("Text")
     }}>
-        <img src="Text.png" alt="Text" style="width:40px; height:40px; position: relative; ">
+        <img src="/src/icons/text-tool.svg" alt="Text" class="icon">
     </button>
 
     <button onclick={() => {
         setCurrentTool("Text Draw")
     }}>
-        <p>💩</p>
+        <img src="/src/icons/poop.svg" alt="Text" class="icon">
     </button>
     
 </div>
 
 <style>
+    .tool-container {
+        color: white;
+    }
 
+    .icon {
+        width: 32px;
+        height: 40px;
+    }
 </style>
