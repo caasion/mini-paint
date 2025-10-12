@@ -2,7 +2,7 @@
     import { colors, currentColor, setCurrentColor } from "../palette";
 </script>
 
-<div style="display: flex; gap: 12px; align-items: center;">
+<div style="display: flex; gap: 12px; justify-content: center;">
     {#each colors as color}
         <div
             style="
