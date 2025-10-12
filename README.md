@@ -1,47 +1,73 @@
-# Svelte + TS + Vite
+# 💩 Mini Paint
 
-This template should help get you started developing with Svelte and TypeScript in Vite.
+> A chaotic, lighthearted MS Paint–style app built in **6 hours** during the TMU MUES Hackathon.
 
-## Recommended IDE Setup
+## 🎨 Overview
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+Mini Paint is a playful spin on MS Paint — designed to help you express yourself, especially after a long week of midterms.  
+The highlight? The **Poop Pen** — a custom brush that lets you *literally* smear poop across the canvas to release your stress (and creativity).
 
-## Need an official Svelte framework?
+We built this as a fun, expressive art app where you can doodle, erase, clear your canvas, and experiment with different pen modes — including one that’s a little too honest about how exams feel sometimes. 💀
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+## ⚙️ Tech Stack
 
-## Technical considerations
+- **Svelte** – for building fast, reactive UI components  
+- **Vite** – for lightning-fast bundling and hot reload  
+- **Konva.js** – for all the canvas drawing logic (brushes, erasing, smearing, etc.)  
 
-**Why use this over SvelteKit?**
+Frontend only — no backend, no database, pure browser chaos.
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+## 🧠 Features
 
-This template contains as little as possible to get started with Vite + TypeScript + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+- ✏️ Basic brush tool for freehand drawing  
+- 💩 Poop Pen for smearing colors (and emotions)  
+- 🧽 Eraser tool that preserves the background  
+- 🧼 Clear canvas button  
+- 💾 Download your masterpiece  
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+## 🚀 Getting Started
 
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+```bash
+# 1. Clone this repository
+git clone https://github.com/<your-username>/mini-paint.git
+cd mini-paint
 
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+# 2. Install dependencies
+npm install
 
-**Why include `.vscode/extensions.json`?**
+# 3. Run the app locally
+npm run dev
 
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
-
-**Why enable `allowJs` in the TS template?**
-
-While `allowJs: false` would indeed prevent the use of `.js` files in the project, it does not prevent the use of JavaScript syntax in `.svelte` files. In addition, it would force `checkJs: false`, bringing the worst of both worlds: not being able to guarantee the entire codebase is TypeScript, and also having worse typechecking for the existing JavaScript. In addition, there are valid use cases in which a mixed codebase may be relevant.
-
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/rixo/svelte-hmr#svelte-hmr).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```ts
-// store.ts
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
+# Then, read the console to open it in your local browser!
 ```
+
+## 🧩 Hackathon Details
+
+Built for the **TMU MUES Hackathon 2025** under the theme: *“Create your own MS Paint.”*
+We had 6 hours to brainstorm, design, and ship an MVP from scratch — and it was the first hackathon for all of us.
+
+### Team Members
+
+* Shreya Gavande – UI Design
+* Nisha Radle – UI Design
+* Hareth Hameed – Pitch & Presentation
+* Isaac Ng – Svelte Developer (that's me!)
+
+## 💡 What I Learned
+
+This was my first-ever hackathon, and I learned more in 8 hours than in an entire week at school.
+
+* How to **collaborate with new teammates** I’d just met on the spot
+* How to **build an MVP fast** instead of chasing perfection
+* How to **learn tools on the fly**, like Konva.js and Svelte
+* And most importantly — how to have fun and create under pressure
+
+We didn’t win a prize, but we walked away with experience, memories, and courage (plus a working Poop Pen).
+
+## 📸 Demo / Screenshots
+
+*(Coming soon – pending final pitch slides and screenshots)*
+
+---
+
+Made with 💩, ☕, and way too many midterms.
