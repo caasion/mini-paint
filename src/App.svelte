@@ -10,5 +10,8 @@
 </script>
 
 <main>
+  {#if $currentTool == "Text"}
+    <TextTool />
+  {/if}
   <Canvas />
 </main>
