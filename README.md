@@ -1,4 +1,4 @@
-# 💩 Mini Paint
+# 💩 Minini Paint
 
 A chaotic, lighthearted MS Paint–style app built in **6 hours** during the TMU MUES Hackathon.
 
@@ -6,7 +6,7 @@ A chaotic, lighthearted MS Paint–style app built in **6 hours** during the TMU
 
 ## 🎨 Overview
 
-Mini Paint is a playful spin on MS Paint, designed to help you express yourself, especially after a long week of midterms.  
+Minini Paint is a playful spin on MS Paint, designed to help you express yourself, especially after a long week of midterms.  
 The highlight? The **Poop Pen**, a custom brush that lets you *literally* smear poop across the canvas to release your stress (and creativity).
  
 We built this as a fun, expressive art app where you can doodle, erase, clear your canvas, and experiment with different pen modes, including one that’s a little too honest about how exams feel sometimes. 💀
